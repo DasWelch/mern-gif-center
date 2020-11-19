@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import "bulma/css/bulma.css";
 
 import gifsList from './components/gifsList.component.js'
+import createPost from './components/create-post.component.js'
 
 export default class App extends Component {
   render() {
@@ -27,12 +28,13 @@ export default class App extends Component {
               Todos
             </Link>
 
-            <Link to="/create" className="navbar-item">
+            <Link to="/createpost" className="navbar-item">
               Create Todo
             </Link>
             </div>
           </nav>
           <Route path="/" exact component={gifsList}/>
+          <Route path="/createpost" exact component={createPost}/>
         </div>
       </Router>
     );
