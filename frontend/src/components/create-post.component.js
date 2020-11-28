@@ -1,15 +1,26 @@
 import React, { Component } from "react";
+import axios from 'axios'
+import FormData from 'form-data'
 import "bulma/css/bulma.css";
+
 
 export default class createPost extends Component {
   constructor() {
     super();
+
+    //this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeFile = this.onChangeFile.bind(this)
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       post_file: "",
       post_description: "",
       post_user: "",
     };
+  }
+  onChangeFile(e){
+    
   }
 
   onChangeDescription(e){
@@ -20,7 +31,10 @@ export default class createPost extends Component {
 
 onSubmit(e){
   e.preventDefault();
-  console.log("submitted")
+
+
+
+  console.log(e);
 }
 
   render() {
@@ -31,7 +45,7 @@ onSubmit(e){
         <form onSubmit={this.onSubmit}>
           <div className="file">
             <label className="file-label">
-              <input className="file-input" type="file" name="resume" />
+              <input className="file-input" type="file" name="resume" id='resume' />
               <span className="file-cta">
                 <span className="file-icon">
                   <i className="fas fa-upload"></i>

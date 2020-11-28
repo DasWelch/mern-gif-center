@@ -18,7 +18,7 @@ export default class gifsList extends Component {
             <div className="post ">
               <div>
                 <Link>
-                  <img alt="the gif you were looking for"></img>
+                  <img alt="the gif you were looking for" alt=""></img>
                 </Link>
               </div>
               <div className="post-details">
