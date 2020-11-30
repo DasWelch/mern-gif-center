@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import axios from 'axios'
-import FormData from 'form-data'
+import axios from "axios";
+import FormData from "form-data";
 import "bulma/css/bulma.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 export default class createPost extends Component {
   constructor() {
@@ -10,32 +11,47 @@ export default class createPost extends Component {
 
     //this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeFile = this.onChangeFile.bind(this)
+    this.onChangeFile = this.onChangeFile.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      post_file: "",
+      post_filename: "no file selected",
+      post_file: undefined,
       post_description: "",
       post_user: "",
     };
   }
-  onChangeFile(e){
-    
-  }
+  onChangeFile(e) {
+    let file = e.target.files[0];
+    let name = file.name;
+    //console.log(file);
 
-  onChangeDescription(e){
     this.setState({
-      post_description: e.target.value
-    })
+      post_filename: name,
+      post_file: file,
+    });
   }
 
-onSubmit(e){
-  e.preventDefault();
+  onChangeDescription(e) {
+    this.setState({
+      post_description: e.target.value,
+    });
+  }
 
+  onSubmit(e) {
+    e.preventDefault();
+    //let file = e.target.files[0] ;
+    //let name = file.name;
 
+    let postobj = {test: "hello"};
 
-  console.log(e);
-}
+    axios
+      .post("http://localhost:5555/createpost", {test: "hello"})
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    //console.log(e);
+  }
 
   render() {
     return (
@@ -45,13 +61,20 @@ onSubmit(e){
         <form onSubmit={this.onSubmit}>
           <div className="file">
             <label className="file-label">
-              <input className="file-input" type="file" name="resume" id='resume' />
+              <input
+                className="file-input"
+                type="file"
+                name="resume"
+                id="resume"
+                onChange={this.onChangeFile}
+              />
               <span className="file-cta">
                 <span className="file-icon">
-                  <i className="fas fa-upload"></i>
+                  <FontAwesomeIcon icon={faUpload} />
                 </span>
                 <span className="file-label">Choose a file…</span>
               </span>
+              <span className="file-name">{this.state.post_filename}</span>
             </label>
           </div>
           <br />
@@ -69,10 +92,7 @@ onSubmit(e){
 
           <div className="field is-grouped">
             <div className="control">
-              <input 
-              type="submit"
-              className="button is-link"
-              ></input>
+              <input type="submit" className="button is-link"></input>
             </div>
             <div className="control">
               <button className="button is-link is-light">Cancel</button>
