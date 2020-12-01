@@ -46,7 +46,7 @@ export default class createPost extends Component {
     let postobj = {test: "hello"};
 
     axios
-      .post("http://localhost:5555/createpost", {test: "hello"})
+      .post("/createpost", {test: "hello"})
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
